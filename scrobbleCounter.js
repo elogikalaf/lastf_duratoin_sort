@@ -18,13 +18,13 @@ async function getTopTracks() {
     const response = await axios.get('https://ws.audioscrobbler.com/2.0/', { params });
  
     const topTracks = response.data.toptracks.track;
+    fs.writeFile("tops.txt", "", (err) => {
+      if (err) throw err;
+    })
     for (const track of topTracks) {
-        if (fs.existsSync("tops.txt")) {
-            await fs.promises.appendFile('tops.txt', `${track.artist.name} - ${track.name} (${track.playcount} scrobbles)\n`);
-        } else {
-            await fs.promises.writeFile('tops.txt', `${track.artist.name} - ${track.name} (${track.playcount} scrobbles)\n`);
-        }
+      await fs.promises.appendFile('tops.txt', `"${track.artist.name} - ${track.name}" : ${track.playcount}\n`);
     }
+
 } catch (error) { console.error(error);}
 }
 
