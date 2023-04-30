@@ -22,22 +22,38 @@ def get_song_length(song_name, artist):
     else:
         return None
 
-# example usage
-# song_name = 'Bohemian Rhapsody'
-# artist = 'Queen'
+# #example usage
+# song_name = 'Queens of the Stone Age'
+# artist = 'Go with the Flow'
 # length = get_song_length(song_name, artist)
 # if length:
-#     print(f'The length of {song_name} by {artist} is {length[0]} minutes and {length[1]} seconds.')
+#     print(f'The length of {song_name} by {artist} is {length}')
 # else:
 #     print('Song not found.')
+lengths = {}
+with open("toptest.txt", 'r') as f:
+    for line in f:
+        scrobbles = line.split(":")[1].strip()
+        artist = line.split(":")[0].split("-")[0].strip(" \"")
+        track = line.split(":")[0].split("-")[1].strip(" \"")
+        duration = get_song_length(track, artist)//1000
+        lengths[f"{artist} - {track}"] = int(duration)*int(scrobbles)
+sorted_lengths = dict(sorted(lengths.items(), key=lambda x: x[1], reverse=True))
 
-with open('output.csv', 'r') as f:
-    csv_reader = csv.reader(f)
-    for row in csv_reader:
-        try:
-            int(row[2])
-        except:
-            continue
-        xd = row
-        title, artist_name, playcount = xd[0], xd[1], int(xd[2].strip())
-        print(f'duration of {title} = {int(get_song_length(title, artist_name))/6000 * playcount} minutes')
+
+with open("last.txt", 'w') as lmao:
+    lmao.write(str(sorted_lengths))
+
+
+
+
+# with open('output.csv', 'r') as f:
+#     csv_reader = csv.reader(f)
+#     for row in csv_reader:
+#         try:
+#             int(row[2])
+#         except:
+#             continue
+#         xd = row
+#         title, artist_name, playcount = xd[0], xd[1], int(xd[2].strip())
+#         print(f'duration of {title} = {int(get_song_length(title, artist_name))/6000 * playcount} minutes')
