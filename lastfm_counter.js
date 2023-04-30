@@ -10,7 +10,7 @@ const extended = 1;
 async function fetchPageCount(username, api_key, limit, extended) {
     try {
         const url = `http://ws.audioscrobbler.com/2.0/?method=user.getrecenttracks&user=${username}&api_key=${api_key}&limit=${limit}&format=json&extended=${extended}`;
-        const response = await axios.get(url, { timeout: 100000});
+        const response = await axios.get(url);
         const data = response.data;
         const totalPages = parseInt(data['recenttracks']['@attr']['totalPages']);
         return totalPages;
@@ -21,7 +21,7 @@ async function fetchPageCount(username, api_key, limit, extended) {
 async function fetchRecentTracks(username, api_key, limit, extended, page) {
     try {
         const url = `http://ws.audioscrobbler.com/2.0/?method=user.getrecenttracks&user=${username}&api_key=${api_key}&limit=${limit}&page=${page}&format=json&extended=${extended}`;
-        const response = await axios.get(url, { timeout: 100000});
+        const response = await axios.get(url);
         const data = response.data;
         const listetningHabit = data;
         return listetningHabit
