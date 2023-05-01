@@ -31,29 +31,19 @@ def get_song_length(song_name, artist):
 # else:
 #     print('Song not found.')
 lengths = {}
-with open("toptest.txt", 'r') as f:
+with open("tops.txt", 'r') as f:
+
     for line in f:
         scrobbles = line.split(":")[1].strip()
         artist = line.split(":")[0].split("-")[0].strip(" \"")
         track = line.split(":")[0].split("-")[1].strip(" \"")
-        duration = get_song_length(track, artist)//1000
-        lengths[f"{artist} - {track}"] = int(duration)*int(scrobbles)
+        duration = get_song_length(track, artist)
+        try:
+            lengths[f"{artist} - {track}"] = int(duration)*int(scrobbles)//1000
+        except:
+            lengths[f"{artist} - {track}"] = 0
 sorted_lengths = dict(sorted(lengths.items(), key=lambda x: x[1], reverse=True))
 
 
 with open("last.txt", 'w') as lmao:
     lmao.write(str(sorted_lengths))
-
-
-
-
-# with open('output.csv', 'r') as f:
-#     csv_reader = csv.reader(f)
-#     for row in csv_reader:
-#         try:
-#             int(row[2])
-#         except:
-#             continue
-#         xd = row
-#         title, artist_name, playcount = xd[0], xd[1], int(xd[2].strip())
-#         print(f'duration of {title} = {int(get_song_length(title, artist_name))/6000 * playcount} minutes')
