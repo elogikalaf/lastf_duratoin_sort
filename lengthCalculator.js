@@ -9,7 +9,7 @@ async function getTrackDuration(artist_name, track_name) {
       try {
             const requestParams = {
                 method: 'track.getInfo',
-                api_key: 'e73d297ddc4744326ccb168abd6fdcff',
+                api_key: '',
                 artist: artist_name,
                 track: track_name,
                 format: 'json'

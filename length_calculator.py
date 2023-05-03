@@ -4,8 +4,8 @@ from math import trunc
 import time
 import csv
 # set up Spotipy credentials
-client_id = 'ba949d1c63684f22b7a734b75dfce034'
-client_secret = 'fd7fab55f754441694fab4ada6343d35'
+client_id = ''
+client_secret = ''
 client_credentials_manager = SpotifyClientCredentials(client_id=client_id, client_secret=client_secret)
 sp = spotipy.Spotify(client_credentials_manager=client_credentials_manager)
 
@@ -17,19 +17,10 @@ def get_song_length(song_name, artist):
         duration_ms = track['duration_ms']
         duration_min = duration_ms / 1000 / 60
         duration_sec = duration_ms / 1000 % 60
-        # return [trunc(round(duration_min, 2)), trunc(duration_sec)]
         return duration_ms
     else:
         return None
 
-# #example usage
-# song_name = 'Queens of the Stone Age'
-# artist = 'Go with the Flow'
-# length = get_song_length(song_name, artist)
-# if length:
-#     print(f'The length of {song_name} by {artist} is {length}')
-# else:
-#     print('Song not found.')
 lengths = {}
 with open("tops.txt", 'r') as f:
 

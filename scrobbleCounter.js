@@ -2,8 +2,8 @@ const axios = require('axios');
 const fs = require('fs');
 const util = require("util");
 
-const LASTFM_API_KEY = '1cdddb3eb441e2d3618ba705a4a36556';
-const LASTFM_USERNAME = 'illogicalaf';
+const LASTFM_API_KEY = '';
+const LASTFM_USERNAME = '';
 
 async function getTopTracks() {
   const params = {

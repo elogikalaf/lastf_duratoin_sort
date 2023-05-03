@@ -3,8 +3,8 @@ const axios = require("axios");
 const csvWriter = require("csv-write-stream");
 const util = require("util");
 
-const apiKey = "416d0fa6cddd704a81918ce4fd6e95b8";
-const username = "illogicalaf";
+const apiKey = "";
+const username = "";
 const limit = 200;
 const extended = 1;
 async function fetchPageCount(username, api_key, limit, extended) {
